@@ -3,11 +3,9 @@ package com.example.compose_codlab
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -51,13 +49,20 @@ fun Greeting(name: String) {
         color = MaterialTheme.colors.primary,
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
-        Column(
+        Row(
             modifier = Modifier
-                .fillMaxWidth()
                 .padding(24.dp)
         ) {
-            Text(text = "hello.")
-            Text(text = name)
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = "hello.")
+                Text(text = name)
+            }
+            OutlinedButton(
+                onClick = { /*TODO*/ }
+            ) {
+                Text(text = "Show more")
+            }
+
 
         }
 
@@ -71,3 +76,4 @@ fun DefaultPreview() {
         Greeting("Android")
     }
 }
+

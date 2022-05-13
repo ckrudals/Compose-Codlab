@@ -9,6 +9,8 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,6 +46,11 @@ fun MyApp(name: List<String> = listOf("g", "m")) {
 @Composable
 fun Greeting(name: String) {
 
+    // 상태 저장할 변수
+    val expanded = remember {
+        mutableStateOf(false)
+    }
+    val extraPadding = if (expanded.value) 48.dp else 0.dp
     // 앱에 넣고자 하는 공통 기능을 처리한다.
     Surface(
         color = MaterialTheme.colors.primary,
@@ -53,14 +60,20 @@ fun Greeting(name: String) {
             modifier = Modifier
                 .padding(24.dp)
         ) {
-            Column(modifier = Modifier.weight(1f)) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(bottom = extraPadding)
+            ) {
                 Text(text = "hello.")
                 Text(text = name)
             }
             OutlinedButton(
-                onClick = { /*TODO*/ }
+                // 클릭하면 반대가 됨
+
+                onClick = { expanded.value = !expanded.value }
             ) {
-                Text(text = "Show more")
+                Text(text = if (expanded.value) "Show more" else "fuck")
             }
 
 
@@ -68,6 +81,7 @@ fun Greeting(name: String) {
 
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

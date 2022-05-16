@@ -2,3 +2,6 @@
 
 ### 레퍼런스
 [[Compose] Column Row Box에 대해 알아보자 #1](https://happy-kmc.tistory.com/45)
+
+[[Compose] compose에서 RecyclerView를 쓰는법](https://happy-kmc.tistory.com/46?category=1186525)
+

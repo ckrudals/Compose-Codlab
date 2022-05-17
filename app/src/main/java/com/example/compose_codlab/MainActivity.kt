@@ -18,7 +18,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.compose_codlab.ui.theme.ComposeCodlabTheme
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 
 class MainActivity : ComponentActivity() {
@@ -124,12 +128,19 @@ fun Greeting(name: String) {
                     fontWeight = FontWeight.ExtraBold
                 ))
             }
-            OutlinedButton(
+            IconButton(
                 // 클릭하면 반대가 됨
 
                 onClick = { expanded = !expanded }
             ) {
-                Text(text = if (expanded) "Show more" else "Hello")
+                Icon(
+                    imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+                    contentDescription = if (expanded){
+                        stringResource(id = R.string.show_less)
+                    }else{
+                        stringResource(id = R.string.show_more)
+                    }
+                )
             }
 
 

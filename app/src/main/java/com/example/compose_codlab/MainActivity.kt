@@ -1,5 +1,6 @@
 package com.example.compose_codlab
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.example.compose_codlab.ui.theme.ComposeCodlabTheme
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.text.font.FontWeight
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,6 +87,7 @@ fun Greetings(name: List<String> = List(1000) { "${it}" }) {
 fun OnboardingPreview() {
     ComposeCodlabTheme {
 
+
         OnboardingScreen {}
     }
 }
@@ -93,7 +96,7 @@ fun OnboardingPreview() {
 fun Greeting(name: String) {
 
     // 상태 저장할 변수
-    var expanded by remember { mutableStateOf(false) }
+    var expanded by rememberSaveable { mutableStateOf(false) }
     val extraPadding by animateDpAsState(
         if (expanded) 48.dp else 0.dp,
         animationSpec = spring(
@@ -116,7 +119,10 @@ fun Greeting(name: String) {
                     .padding(bottom = extraPadding.coerceAtLeast(0.dp))
             ) {
                 Text(text = "hello.")
-                Text(text = name)
+                // copy 사용가능
+                Text(text = name, style = MaterialTheme.typography.h4.copy(
+                    fontWeight = FontWeight.ExtraBold
+                ))
             }
             OutlinedButton(
                 // 클릭하면 반대가 됨
@@ -132,7 +138,12 @@ fun Greeting(name: String) {
     }
 }
 
-
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    uiMode = UI_MODE_NIGHT_YES,
+    name = "DefaultPreviewDark"
+)
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
